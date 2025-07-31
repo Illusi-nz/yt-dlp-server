@@ -62,5 +62,15 @@ def download():
         download_name=os.path.basename(filename)
     )
 
+@app.route('/debug-cookies')
+def debug_cookies():
+    try:
+        with open('cookies.txt', 'r') as f:
+            content = f.read(500)  # read first 500 chars to avoid huge output
+        return "<pre>" + content + "</pre>"
+    except Exception as e:
+        return f"Error reading cookies.txt: {e}", 500
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
