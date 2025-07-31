@@ -19,24 +19,31 @@ def download():
     uid = str(uuid.uuid4())
     out_path = f"/tmp/{uid}.%(ext)s"
 
+    headers = {
+        'User-Agent': (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/116.0.0.0 Safari/537.36"
+        ),
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+        'Referer': 'https://www.youtube.com/',
+        'Connection': 'keep-alive',
+        'DNT': '1',
+        'Upgrade-Insecure-Requests': '1'
+    }
+
     ydl_opts = {
         'cookiefile': 'cookies.txt',
         'outtmpl': out_path,
         'format': 'bestaudio/best' if format_type == 'mp3' else 'best',
-        'quiet': False,  # verbose output to see issues
+        'quiet': False,
         'noplaylist': True,
-        'http_headers': {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Referer': 'https://www.youtube.com/'
-        },
+        'http_headers': headers,
+        'geo_bypass': True,
         'verbose': True,
-        'logger': None,  # or a logger to capture output
-        'forceurl': True,  # sometimes helps bypass bot checks
     }
-
 
     # 🔧 Add MP3 postprocessor
     if format_type == 'mp3':
