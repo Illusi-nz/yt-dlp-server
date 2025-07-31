@@ -20,11 +20,16 @@ def download():
     out_path = f"/tmp/{uid}.%(ext)s"
 
     ydl_opts = {
-        'cookiefile': 'cookies.txt',
+        'cookiefile': 'cookies.txt',  # path relative to /app
         'outtmpl': out_path,
         'format': 'bestaudio/best' if format_type == 'mp3' else 'best',
         'quiet': True,
-        'noplaylist': True
+        'noplaylist': True,
+        'http_headers': {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) ' 
+                        'AppleWebKit/537.36 (KHTML, like Gecko) '
+                        'Chrome/116.0.0.0 Safari/537.36'
+        }
     }
 
     # 🔧 Add MP3 postprocessor
