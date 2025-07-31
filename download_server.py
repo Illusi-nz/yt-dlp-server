@@ -38,11 +38,12 @@ def download():
         'cookiefile': 'cookies.txt',
         'outtmpl': out_path,
         'format': 'bestaudio/best' if format_type == 'mp3' else 'best',
-        'quiet': False,
+        'quiet': True, # false
         'noplaylist': True,
         'http_headers': headers,
         'geo_bypass': True,
         'verbose': True,
+        'skip_download': True
     }
 
     # 🔧 Add MP3 postprocessor
