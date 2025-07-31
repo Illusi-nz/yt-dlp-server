@@ -19,6 +19,7 @@ def download():
     out_path = f"/tmp/{uid}.%(ext)s"
 
     ydl_opts = {
+        'cookiefile': 'cookies.txt',  # Add your cookies.txt path here
         'outtmpl': out_path,
         'format': 'bestaudio/best' if format_type == 'mp3' else 'best',
         'quiet': True,
